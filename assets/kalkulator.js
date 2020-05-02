@@ -17,15 +17,15 @@ function clearCarculator() {
 }
 
 function inputDigit(digit) {
-   if (calculator.waitingForSecondNumber && calculator.firstNumber === calculator.displayNumber) {
-           calculator.displayNumber = digit;
-   } else {
-       if (calculator.displayNumber === '0') {
-           calculator.displayNumber = digit;
-       } else {
-           calculator.displayNumber += digit;
-       }
-   }
+	if (calculator.waitingForSecondNumber && calculator.firstNumber === calculator.displayNumber) {
+		calculator.displayNumber = digit;
+	} else {
+		if (calculator.displayNumber === '0') {
+			calculator.displayNumber = digit;
+		} else {
+			calculator.displayNumber += digit;
+		}
+	}
 }
 
 function inverseNumber() {
@@ -58,7 +58,17 @@ function performCalculation() {
 		result = parseInt(calculator.firstNumber) - parseInt(calculator.displayNumber)
 	}
 
+	// objek yang akan dikirimkan sebagai argumen fungsi putHistory()
+   const history = {
+       firstNumber: calculator.firstNumber,
+       secondNumber: calculator.displayNumber,
+       operator: calculator.operator,
+       result: result
+   }
+
+   	putHistory(history);
 	calculator.displayNumber = result;
+	renderHistory();
 }
 
 const buttons = document.querySelectorAll(".button");
